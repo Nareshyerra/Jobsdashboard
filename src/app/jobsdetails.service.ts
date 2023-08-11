@@ -16,7 +16,11 @@ interface ResumeViewModel {
   isStatusSelected: boolean;
 }
 
- interface JobResumeViewModel {
+
+
+
+
+interface JobResumeViewModel {
   jobId: number;
   companyName: string;
   jobTitle: string;
@@ -25,10 +29,15 @@ interface ResumeViewModel {
   jobType: string;
   postedDate: string;
   location: string;
+  salary:number;
+  endDate:string;
+  positions:number;
+  qualification:string;
   jobDescription: string;
   resumes: ResumeViewModel[];
+  showResumes?: boolean; 
+  statusInput?: string;
 }
-
 @Injectable({
   providedIn: 'root'
 })

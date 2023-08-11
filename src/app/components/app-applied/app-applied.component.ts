@@ -46,6 +46,7 @@ export class AppAppliedComponent implements OnInit {
   pages: number[] = [];
 
   displayedAppliedJobs: any[] = [];
+  clickedJobId: number | null = null;
   
   showStatusMessage: boolean = false;
 appliedUsername:string='';
@@ -113,11 +114,11 @@ generatePageNumbers() {
   }
 }
 
-
-
-
 viewJobDetails(jobId: number) {
   console.log('Clicked JobId:', jobId);
+
+  // Set the clicked job
+  this.clickedJobId = jobId;
 
   const jobItem = this.displayedAppliedJobs.find(item => item.jobId === jobId);
 
@@ -125,50 +126,55 @@ viewJobDetails(jobId: number) {
     // Fetch the schedule meeting date for the clicked job from the Resumes API
     this.jobsint.getScheduleMeetingDateByJobAndName(jobId, this.appliedUsername).subscribe(
       (scheduleMeetingDate) => {
-        console.log('Schedule Meeting Date:', scheduleMeetingDate);
-
-        if (scheduleMeetingDate) {
-          // Update the job object with the schedule meeting date
-          jobItem.scheduleMeetingDate = scheduleMeetingDate;
-        } else {
-          // If the schedule meeting date is not available, set it to null or an appropriate message
-          jobItem.scheduleMeetingDate = null; // Or 'Schedule meeting date not available' or any custom message
-        }
        
+
+        // Update the job object with the schedule meeting date if it's available
+        if (scheduleMeetingDate) {
+          jobItem.scheduleMeetingDate ='Interview is scheduled on: ' + scheduleMeetingDate;
+          jobItem.rejectionReason = null; // Clear the rejection reason
+        } else {
+          jobItem.scheduleMeetingDate = 'Meeting date not yet selected.';
+        }
+      }
+   
+    );
+
+    // Fetch the rejection reason for the clicked job from the Resumes API
+    this.jobsint.getRejectionReasonByJobAndName(jobId, this.appliedUsername).subscribe(
+      (response) => {
+        const rejectionReason = response.rejectionReason;
+        console.log('Application Rejected:', rejectionReason);
+
+        // Update the job object with the rejection reason if it's posted
+        if (rejectionReason && rejectionReason !== 'Rejection reason not yet posted.') {
+          jobItem.rejectionReason ='Application Rejected:'+ rejectionReason;
+          jobItem.scheduleMeetingDate = null; // Clear the meeting date
+        } else {
+          jobItem.rejectionReason = null; // Clear the rejection reason
+        }
       },
       (error) => {
         console.error(error);
-        // If an error occurs while fetching the schedule meeting date, set it to null or an appropriate message
-        jobItem.scheduleMeetingDate =null; // Or 'Error fetching schedule meeting date' or any custom message
-       
       }
     );
 
-
-  this.jobsint.getRejectionReasonByJobAndName(jobId, this.appliedUsername).subscribe(
-    (response) => {
-      const rejectionReason = response.rejectionReason;
-      console.log('Rejection Reason:', rejectionReason);
-
-      // Update the job object with the rejection reason
-      const jobItem = this.displayedAppliedJobs.find(item => item.jobId === jobId);
-      if (jobItem) {
-        jobItem.rejectionReason = rejectionReason ;
-        
-      }
-     
-      
-    },
-    (error) => {
-      console.error(error);
-     
+    // Show "In progress, waiting for client." message if both rejection reason and meeting date are not posted
+    if (!jobItem.rejectionReason && !jobItem.scheduleMeetingDate) {
+      jobItem.rejectionReason = 'In progress, waiting for client.';
+      jobItem.scheduleMeetingDate = 'In progress, waiting for update.'; // Clear the meeting date
+    } else {
+      // Clear the waiting message if either the rejection reason or the meeting date is posted
+      jobItem.rejectionReason = null;
     }
-  );
 
+    // Hide status message if either rejection reason or meeting date is posted
+    if (jobItem.rejectionReason || jobItem.scheduleMeetingDate) {
+      this.showStatusMessage = true;
+    } else {
+      this.showStatusMessage = false;
+    }
+  }
 }
 
 
-
-}
-  
 }

@@ -167,6 +167,17 @@ recentSearches: any;
              
               console.log('Resume uploaded successfully.');
               alert("Resume uploaded sucessfully")
+
+
+
+              const jobId = this.resumeData.jobId;
+  const jobIndex = this.jobsList.findIndex(job => job.jobId === jobId);
+  if (jobIndex !== -1) {
+    this.jobsList[jobIndex].resumeUploaded = true;
+  }
+
+  // Close the upload popup
+  this.showUploadPopupFlag = false;
              
               
             }

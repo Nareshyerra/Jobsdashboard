@@ -1,35 +1,68 @@
+.sign-button{
+
+  background: #9A1663; 
+  color: hsl(0, 24%, 94%);
+  border-radius: 10px 4px 12px 6px;
+  margin-left: 10px;
+  justify-content: end;
+  font-size: 20px;
+  text-align: center;
+}
+.navbar {
+
+  background-color: #333;
+
+}
+
+.navbar-nav {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  list-style-type: none;
+
+  margin: 0;
+
+  padding: 0;
+
+}
 
 
+.nav-item {
 
-  .navbar-nav .nav-item:hover .nav-link,
-  .navbar-nav .nav-item.active .nav-link,
-  .navbar-nav .nav-item:focus .nav-link {
-    /* Change the color to your desired highlight color */
-    font-weight: bold; /* Add any additional styling for the highlight effect */
-    color: aquamarine;
-    
-    
-  }
+  margin-right: 20px; /* Adjust the margin value as needed */
 
-  .navbar-nav .nav-link {
-    margin-right: 20px; /* Adjust the value to increase or decrease the space */
-  }
+}
 
+.nav-link {
 
+  color: white;
 
-  
-  .sign-button{
-    background: #9A1663; 
-    color: #fff; 
-    border-radius: 10px 4px 12px 6px; 
+  font-size: 20px;
 
-    margin: 10px; 
-    justify-content: end; 
- 
-    font-size: 15px;
-    text-align: center;
-  }
+  text-decoration: none;
+
+  padding: 8px 12px;
+
+  border-radius: 4px;
+
+}
 
 
-  
+.nav-link:hover {
 
+  background-color: #b8abab;
+
+}
+
+
+.nav-link.active {
+
+  background-color: #dccfcf;
+
+  font-weight: bold;
+
+}

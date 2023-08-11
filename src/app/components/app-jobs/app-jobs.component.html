@@ -69,6 +69,7 @@
           <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Positions: </span>{{ item.positions }}</p>
         
           <p>
+           
               <span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>
               <ng-container *ngIf="searchText && item.jobType">
                 <ng-container *ngFor="let part of highlightText(item.jobType)">
@@ -76,7 +77,11 @@
                 </ng-container>
               </ng-container>
               <span *ngIf="!searchText || !item.jobType">{{ item.jobType }}</span>
+
           </p>
+
+
+          <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
             <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
             <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
             <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
@@ -93,7 +98,9 @@
           <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.jobDescription }}</p>
          
          <p>
-          <button id="uploadBtn" (click)="openUploadPopup(item.jobId)" style="margin-right: 3px;" class="btn btn-secondary highlight-button">Upload Resume</button>
+         
+
+          <button id="uploadBtn" (click)="openUploadPopup(item.jobId)" [disabled]="item.ischecked" style="margin-right: 3px;" class="btn btn-secondary highlight-button">Upload Resume</button>
           <button *ngIf="!item.ischecked" (click)="apply(appliedUsername,item)" class="btn btn-primary highlight-button">Apply</button>
           <span *ngIf="item.ischecked" class="btn btn-success">Applied</span>
         </p>

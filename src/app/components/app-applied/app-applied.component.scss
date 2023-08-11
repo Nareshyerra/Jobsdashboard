@@ -13,9 +13,9 @@
     justify-content: space-between;
   }
   .job-box {
-  width: 280px; /* Set the desired width for each job box */
-  height: 400px; /* Set the desired height for each job box */
-  border: 1px solid #ccc;
+  width: 340px; /* Set the desired width for each job box */
+  height: 550px; /* Set the desired height for each job box */
+  border: 5px solid #ccc;
   padding: 10px;
   margin: 10px;
 }
@@ -27,8 +27,12 @@
     margin-bottom: 5px;
   }
 
-  .view-more {
-    color: blue;
-    cursor: pointer;
-    text-decoration: underline;
+  .Rejectstatus{
+    color: Red;
+    font-size: 20px;
+  }
+
+  .status{
+    color: green;
+    font-size: 20px;
   }

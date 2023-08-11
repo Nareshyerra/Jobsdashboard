@@ -10,7 +10,7 @@ import { tap } from 'rxjs';
 export class AuthService {
 
 
-  private baseUrl: string = 'https://localhost:7058/api/User/';
+  private baseUrl: string = 'https://localhost:7058/api/Client/';
   // private Url: string = 'https://localhost:7058/api/applicant/';
   private userPayload:any;
   

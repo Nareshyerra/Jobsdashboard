@@ -26,11 +26,19 @@
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Type: </span>{{ item.jobType }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>{{ item.location }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.jobDescription }}</p>
-        <button>click to view job status</button>
-        <p *ngIf="showStatusMessage">Status: Waiting</p>
-         <p *ngIf="item.rejectionReason ">Rejection Reason: {{ item.rejectionReason }}</p>
-        <p *ngIf="item.scheduleMeetingDate ">Schedule Meeting Date: {{ item.scheduleMeetingDate   }}</p>
-      
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Positions: </span>{{ item.positions }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
+       
+        <button type="button" class="btn btn-primary mr-1">click to view job status</button>
+     
+          
+        <p *ngIf="item.jobId === clickedJobId" class="Rejectstatus">{{ item.rejectionReason }}</p>
+        <p *ngIf="item.jobId === clickedJobId" class="status">{{ item.scheduleMeetingDate }}</p>
+       
+       
       </div>
     </div>
     

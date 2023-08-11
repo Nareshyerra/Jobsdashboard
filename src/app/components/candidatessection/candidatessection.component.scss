@@ -1,100 +1,248 @@
-/* resume-list.component.css */
-
 .job-details {
+
   margin-bottom: 20px;
+
 }
+
+ 
 
 .toggle-icon {
+
   font-weight: bold;
+
   cursor: pointer;
+
   padding-left: 5px;
+
 }
+
+ 
 
 .applicants-resumes {
+
   max-height: 0;
+
   overflow: hidden;
+
   transition: max-height 0.3s ease-out;
+
 }
+
+ 
 
 .applicants-resumes.active {
+
   max-height: 500px; /* Set an appropriate value for the maximum height */
+
 }
 
+ 
 
+ 
 
+ 
 
+ 
+
+ 
 
 .jobs-row {
+
   display: flex;
+
   flex-wrap: wrap;
+
   justify-content: space-between;
+
 }
+
 .job-box {
-width: 280px; /* Set the desired width for each job box */
-height: 400px; /* Set the desired height for each job box */
+
+width: 320px; /* Set the desired width for each job box */
+
+height: 500px; /* Set the desired height for each job box */
+
 border: 1px solid #ccc;
+
 padding: 10px;
+
 margin: 10px;
+
 }
+
 .job-box h3 {
+
   margin-top: 0;
+
 }
+
+ 
 
 .job-box p {
+
   margin-bottom: 5px;
+
 }
 
+ 
 
-/* candidatessection.component.scss */
-/* candidatessection.component.scss */
+ 
 
-/* Styles for the popup overlay */
+
 .popup-overlay {
+
 position: fixed;
+
 top: 0;
+
 left: 0;
+
 width: 100%;
+
 height: 100%;
+
 background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+
 display: flex;
+
 justify-content: center;
+
 align-items: center;
+
 z-index: 9999;
+
 opacity: 0; /* Hide the popup by default */
+
 pointer-events: none; /* Disable pointer events so that the popup is not clickable */
+
 }
+
+ 
 
 /* Show the popup when "showResumesPopup" is true */
+
 .popup-overlay.show {
+
 opacity: 1;
+
 pointer-events: auto;
+
 }
+
+ 
 
 /* Styles for the popup content */
+
 .popup-content {
+
 background-color: #fff;
+
 padding: 20px;
+
 border-radius: 15px;
+
 max-width: 1200px;
+
 max-height: 80vh; /* Limit the height of the popup */
+
 overflow-y: auto;
+
 overflow-x: auto; /* Enable vertical scrolling if content overflows */
+
+position: relative;
+
 }
+
+ 
 
 /* Styles for the pagination controls */
+
 .pagination {
+
 margin-top: 20px;
+
 }
+
+ 
 
 /* Styles for the table in the popup */
+
 table {
-width: 100%;
+
+width: 1100px;
+
+border-collapse: collapse;
+
 }
 
-th, td {
-text-align: left;
-padding: 8px;
-}
+ 
+
+ 
+
+ 
 
 /* Add more styles as needed */
 
+/* Add a close icon to the top-right corner of the popup content */
+
+.close-icon {
+
+  position: absolute;
+
+  top: 10px;
+
+  right: 20px;
+
+  font-size: 30px;
+
+  color: #888;
+
+  cursor: pointer;
+
+}
+
+ 
+
+.close-icon:hover {
+
+  color: #a91a1a; /* Change color on hover if desired */
+
+}
+
+.table-header {
+
+  text-align: center;
+
+  padding: 10px;
+
+  background-color: #f0f0f0;
+
+  font-weight: bold;
+
+}
+
+th, td {
+
+  text-align: left;
+
+  padding: 10px;
+
+  padding-left: 30px;
+
+  border: 1px solid #ccc; /* Add a border to all sides of each cell */
+
+  border-top: none; /* Remove top border for th cells */
+
+}
+
+ 
+
+.disabled-cell {
+
+  background-color: #f8f8f8; /* Change the background color to visually indicate the disabled state */
+
+  color: #888; /* Change the text color for better contrast */
+
+  pointer-events: none; /* Disable pointer events to prevent interaction */
+
+}
