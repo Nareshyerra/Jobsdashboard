@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt'
 import { TokenApiModel } from '../models/token-api.model';
-import { tap } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })

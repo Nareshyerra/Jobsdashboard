@@ -6,17 +6,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
   
 </head>
 
 <body>
- 
 
   <div class="body">
     <div class="container">
-<div class="jobs-row">
-      <div class="job-box" *ngFor="let item of displayedAppliedJobs" (click)="viewJobDetails(item.jobId)" >
+      <!-- <div class="empty-jobs-container" *ngIf="displayedAppliedJobs.length === 0">
+
+        <h4 class="content">No Jobs Are Applied</h4>
+  
+        <button routerLink="/app-dashboard/jobspage" class="apply">Click To Apply</button>
+  
+        <div class="flowing-image"></div> -->
+      <div class="jobs-row"> 
+      <div class="job-box" *ngFor="let item of displayedAppliedJobs"  >
+       
       
         <!-- <h1>{{item.jobId}}</h1> -->
         <h3>{{ item.jobTitle }}</h3>
@@ -31,14 +39,16 @@
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
-       
-        <button type="button" class="btn btn-primary mr-1">click to view job status</button>
-     
-          
-        <p *ngIf="item.jobId === clickedJobId" class="Rejectstatus">{{ item.rejectionReason }}</p>
-        <p *ngIf="item.jobId === clickedJobId" class="status">{{ item.scheduleMeetingDate }}</p>
-       
-       
+    
+        <h3>Jobs status</h3>
+        <p class="Rejectstatus">{{ item.rejectionReason }} </p>
+  <p class="status">{{ item.scheduleMeetingDate}} 
+  </p>
+
+  <ng-container *ngIf="!item.rejectionReason && !item.scheduleMeetingDate">
+    <p class="in-progress">In progress, waiting for client. 
+    </p>
+  </ng-container>
       </div>
     </div>
     

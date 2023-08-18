@@ -1,0 +1,29 @@
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    margin-left: 160px;
+}
+
+
+
+.widget {
+
+    height: 400px;
+
+    background-color: #fff;
+
+    border-radius: 5px;
+
+    margin: 10px;
+     box-shadow: 5px 5px 5px #939393;
+    margin-left: 160px;
+
+}
+
+.button{
+
+    background-color: rgb(113, 113, 225);
+    margin-left: 5px;
+}

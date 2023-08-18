@@ -1,17 +1,16 @@
+
 .jobs-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
 }
 
 .job-box {
-  width: 340px;
-  /* Set the desired width for each job box */
-  height: 540px;
-  /* Set the desired height for each job box */
-  border: 1px solid #ccc;
+  border: 5px solid #ccc;
   padding: 10px;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 .job-box h3 {
@@ -411,16 +410,6 @@ body{
   align-items: center;
   min-height: 50vh;
   margin: 0;
-   //background-color: #eca1a6; /* Set the background color for the entire page */
-  // background-image: url("https://cdn.pixabay.com/photo/2015/11/03/09/01/business-card-1019948_640.jpg");
-  // background-size: cover;
-  // // background-attachment: fixed;
-
-  // background-repeat: no-repeat;
-  // padding: 20px;
- 
-//  background-size: 1000px;
-//  background-position-x: center;
 
   
 }
@@ -451,4 +440,13 @@ position-relative{
   border-radius: 4px;
   
   font-size: 20px;
+}
+
+
+.no-match-message {
+  color: red; /* Adjust the color as needed */
+  font-weight: bold;
+  margin-top: 10px; /* Adjust the margin as needed */
+  text-align: center;
+  font-size: 35px;
 }

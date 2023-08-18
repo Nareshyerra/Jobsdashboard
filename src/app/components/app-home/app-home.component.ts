@@ -97,7 +97,7 @@ export class AppHomeComponent implements OnInit {
       content: "I had been struggling to find a job that matched my qualifications until I stumbled upon the jobs portal.."
     }
   ];
-  //Testimonials end....
+
 
 
 
@@ -156,7 +156,7 @@ export class AppHomeComponent implements OnInit {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
       this.updateDisplayedJobs();
-      // this.generatePageNumbers(); 
+   
     }
   }
  
@@ -185,7 +185,7 @@ export class AppHomeComponent implements OnInit {
       this.totalPages = Math.ceil(this.jobsList.length / this.itemsPerPage);
       this.generatePageNumbers();
       this.updateDisplayedJobs();
-      this.startCarousel();
+    
 
       
     });
@@ -196,103 +196,9 @@ export class AppHomeComponent implements OnInit {
     }, 6000); 
 
 
-
-
-   
-
   }
 
 
   
-
-  //carousel code
-  startCarousel() {
-    let currentIndex = 0;
-    setInterval(() => {
-      this.currentImage = this.images[currentIndex];
-      currentIndex = (currentIndex + 1) % this.images.length;
-    }, 3000); // Change image every 3 seconds
-  }
-
-
-//chat bot
-
-
-messages: Message[] = [];
-
-  userInput: string = '';
-
-  showChatbot: boolean = false;
-handleUserInput() {
-
-  const userMessage: Message = { author: 'user', content: this.userInput };
-
-  this.messages.push(userMessage);
-
-  this.userInput = '';
-
-
-
-
-  const botMessage: Message = { author: 'bot', content: this.getBotMessage(userMessage.content) };
-
-  setTimeout(() => {
-
-    this.messages.push(botMessage);
-
-  }, 1500);
-
- 
-
-}
-
-
-
-
-getBotMessage(question: string) {
-
-  const messageMap: { [key: string]: string } = {
-
-    'Hi': 'Hello,How can I help you',
-
-    'Hello': 'Hi,How can I help you',
-
-    'Who are you': 'My name is Test Sat Bot',
-
-    'What is your role': 'Just guide for the user',
-
-    'Priyanka':'Darshanala'
-
-  };
-
-  return messageMap[question] || 'I can\'t understand your text. Can you please repeat?';
-
-}
-
-toggleChatbot() {
-
-  this.showChatbot = !this.showChatbot;
-
- 
-
-}
-
-closeChatbot() {
-
-  this.showChatbot = false;
-
-}
-
-
-
-
-
-
-onFileChange(event: any): void {
-  const fileList: FileList = event.target.files;
-  if (fileList.length > 0) {
-    this.resume = fileList[0];
-  }
-}
 
 }

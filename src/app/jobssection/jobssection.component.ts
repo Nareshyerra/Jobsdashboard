@@ -39,7 +39,7 @@ export class JobssectionComponent implements OnInit {
   showEditFormFlag = false;
   hasResults: boolean = true;
 
-
+ 
  
   userId: number | undefined;
   username: string = '';
@@ -109,11 +109,9 @@ export class JobssectionComponent implements OnInit {
 
   }
   
-  // onSubmit(){
-  //   console.log(this.selectedJob)
-  // }
+
   showEditForm(job: any) {
-    this.selectedJob = { ...job }; // Create a copy of the selected job to avoid modifying the original data directly
+    this.selectedJob = { ...job }; 
     this.showEditFormFlag = true;
   }
  
@@ -134,7 +132,7 @@ onSubmit() {
     (response) => {
 
       this.toast.success({detail:"updated successfully", duration: 3000});
-      console.log('Job updated successfully:', response);
+    
 
       this.hideEditForm(); // Hide the edit form after successful update
       setTimeout(() => {
@@ -150,7 +148,7 @@ delete(jobId:number){
     (response) =>{
      
       this.toast.success({detail:"Deleted successfully", duration: 3000});
-      console.log("deleted", response)
+     
       setTimeout(() => {
         window.location.reload();
       }, 3000);
@@ -159,12 +157,13 @@ delete(jobId:number){
 }
 
 
-
-
 search() {
   this.searchResults = this.jobsList.filter(job => {
     return job.jobTitle.toLowerCase().includes(this.searchText.toLowerCase());
   });
+
+  this.hasResults = this.searchResults.length > 0;
+
   if (this.searchText && !this.recentSearches.includes(this.searchText)) {
     this.recentSearches.unshift(this.searchText);
   }
@@ -174,10 +173,7 @@ search() {
 selectResult() {
   if (this.searchResults && this.searchResults.length > 0) {
     const selectedResult = this.searchResults[0];
-    // Assuming the first result is selected
-    // Do something with the selected result, e.g., display details, navigate to a page, etc.
-    // ...
-    // Close the search or perform any other desired actions
+  
     this.searchQuery = '';
     this.searchResults = null;
   }
@@ -190,7 +186,7 @@ clearSearch() {
 }
 onEnterPressed(event: any) {
   event.preventDefault();
-  // Implement your logic when the enter key is pressed
+ 
   console.log('Enter key pressed');
   this.search();
   if (event.key === 'Enter') {

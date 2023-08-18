@@ -47,20 +47,21 @@ export class JobsdetailsService {
   constructor(private http:HttpClient) { }
 
 
-baseUrl = 'https://localhost:7058/api/Jobs/Addjobsdata';
+
 Url = 'https://localhost:7058/api/Jobs';
 applicantUrl = "https://localhost:7058/api/applicant";
 applyjobsurl = "https://localhost:7058/api/Applied/ApplyForJob";
 getappliedurl = "https://localhost:7058/api/Applied/AppliedJobs";
 
 
-getbyuser ="https://localhost:7058"
+getbyuser ="https://localhost:7058";
 
 resumeuploadUrl="https://localhost:7058/api/ResumeClass";
-resumeget="https://localhost:7058/api/ResumeClass/8";
-private apiUrl = 'https://localhost:7058/api/Resumes';
 
-statusget = "https://localhost:7058/api/Resumes/"
+statusget = "https://localhost:7058/api/Resumes/";
+
+
+userUrl= 'https://localhost:7058/api/Applicant';
 
 getmethod(appliedUsername: string): Observable<any>{
   const url = `${this.getbyuser}/api/Jobs/Jobs?appliedUsername=${appliedUsername}`;
@@ -149,11 +150,6 @@ getResumes(username:string): Observable<JobResumeViewModel[]> {
 }
 
 
-
-
-
-
-
 getScheduleMeetingMessage(resumeId: number): Observable<string> {
   const url = `${this.statusget}${resumeId}/ScheduleMeeting`;
   return this.http.get<string>(url);
@@ -175,5 +171,12 @@ getRejectionReasonByJobAndName(jobId: number, name: string): Observable<any> {
   const url = `${this.statusget}GetRejectionReasonByJobAndName?jobId=${jobId}&name=${name}`;
   return this.http.get<any>(url);
 }
+
+
+getUserDetails(username: string): Observable<any> {
+  const url = `${this.userUrl}/userdetails/${username}`;
+  return this.http.get(url);
+}
+
 
 }

@@ -8,16 +8,17 @@
 
 
 .jobs-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .job-box {
-  width: 340px; /* Set the desired width for each job box */
-  height: 550px; /* Set the desired height for each job box */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.job-box {
   border: 5px solid #ccc;
   padding: 10px;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 }
   .job-box h3 {
     margin-top: 0;
@@ -35,4 +36,86 @@
   .status{
     color: green;
     font-size: 20px;
+  }
+
+  .in-progress{
+    color: orange;
+    font-size: 25px;
+  }
+
+
+
+ 
+
+  .content {
+
+    font-size: 45px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    padding: 50px;
+
+    margin-bottom: 500px; /* Remove default margin */
+
+  }
+
+   
+
+  .apply {
+
+    background-color: #0d0e0e;
+
+    color: #fff;
+
+    border: none;
+
+    border-radius: 4px;
+
+    padding: 10px 20px;
+
+    position: absolute;
+
+    bottom: 70px;
+
+    left: 51%;
+
+    transform: translateX(-50%);
+
+    cursor: pointer;
+
+  }
+
+  .apply:hover {
+
+    background-color: #012904;
+  }
+
+  .empty-jobs-container {
+
+    background-image: url("https://cdn.pixabay.com/photo/2015/11/03/09/01/business-card-1019948_640.jpg");
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+
+    padding: 260px;
+
+    background-size: 800px;
+
+    background-position-x: center;
+
+    margin-top: -20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+ 
+
   }

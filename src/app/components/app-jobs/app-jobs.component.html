@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,13 +39,7 @@
           </ng-container>
           <span *ngIf="!searchText || !item.jobTitle">{{ item.jobTitle }}</span>
         </p>
-
-
-
-
-
-
-        <p>
+      <p>
           <span style="color: rgb(8, 8, 8); font-weight: 600;">Company Name: </span>
           <ng-container *ngIf="searchText && item.companyName">
             <ng-container *ngFor="let part of highlightText(item.companyName)">
@@ -83,8 +75,8 @@
 
           <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
             <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
-            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
-            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate | date}}</p>
+            <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate | date}}</p>
         
            <p>
               <span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>
@@ -97,14 +89,21 @@
           </p>
           <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Job Description: </span> {{ item.jobDescription }}</p>
          
+        
          <p>
          
 
-          <button id="uploadBtn" (click)="openUploadPopup(item.jobId)" [disabled]="item.ischecked" style="margin-right: 3px;" class="btn btn-secondary highlight-button">Upload Resume</button>
-          <button *ngIf="!item.ischecked" (click)="apply(appliedUsername,item)" class="btn btn-primary highlight-button">Apply</button>
-          <span *ngIf="item.ischecked" class="btn btn-success">Applied</span>
-        </p>
-      
+        
+           <button id="uploadBtn"
+           (click)="openUploadPopup(item.jobId)"
+           *ngIf="!item.ischecked; else appliedButton"
+           class="btn btn-primary highlight-button">
+     Apply
+   </button>
+ 
+   <ng-template #appliedButton>
+     <button class="btn btn-success" >Applied</button>
+   </ng-template>
       </div>
     </div>
     
@@ -132,13 +131,15 @@
       <h3>Name</h3>
       <input type="text"  [value]="appliedUsername" name="name" [(ngModel)]="resumeData.name">
       <h3>Email</h3>
-      <input type="text" placeholder="Enter Email" name="email" [(ngModel)]="resumeData.email">
+      <input type="text" [value]="resumeData.email" name="email" [(ngModel)]="resumeData.email">
 
       <h3>Upload Resume</h3>
       <input type="file" (change)="onFileSelected($event)">
       <div class="popup-buttons">
         <button class="button" (click)="cancelUpload()">Cancel</button>
-        <button class="savebtn"(click)="uploadResume()">Save</button>
+        
+        <button class="savebtn" (click)="saveAndApply()">Save & Apply</button>
+        
        
       </div>
       
@@ -153,3 +154,7 @@
 <!-- </body> -->
 
 <!-- </html> -->
+
+
+
+

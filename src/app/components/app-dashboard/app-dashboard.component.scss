@@ -1,3 +1,15 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+}
+
+
 .sign-button{
 
   background: #9A1663; 
@@ -33,7 +45,7 @@
 
 .nav-item {
 
-  margin-right: 20px; /* Adjust the margin value as needed */
+  margin-right: 20px; 
 
 }
 

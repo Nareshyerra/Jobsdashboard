@@ -1,3 +1,74 @@
+
+.date{
+
+color: rgb(13, 2, 2);
+font-weight: bold;
+
+
+}
+
+
+
+
+body {
+
+  position: relative;
+
+ 
+  margin: 20px;
+
+  padding: 0; /* Reset default padding */
+
+  font-family: Arial, sans-serif; /* Use your preferred font-family */
+
+}
+.content {
+
+  font-size: 45px;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  padding: 50px;
+
+  margin-bottom: 500px; /* Remove default margin */
+
+  margin-top: 40px;
+
+}
+
+
+.empty-jobs-container {
+
+  background-image: url("https://cdn.pixabay.com/photo/2015/11/03/09/01/business-card-1019948_640.jpg");
+
+  background-size: cover;
+
+  background-repeat: no-repeat;
+
+  padding: 260px;
+
+  background-size: 800px;
+
+  background-position-x: center;
+
+  margin-top: -20px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100vh;
+
+ 
+
+}
+
+
+
 .job-details {
 
   margin-bottom: 20px;
@@ -32,42 +103,23 @@
 
 .applicants-resumes.active {
 
-  max-height: 500px; /* Set an appropriate value for the maximum height */
+  max-height: 500px; 
 
 }
 
- 
-
- 
-
- 
-
- 
-
- 
 
 .jobs-row {
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  justify-content: space-between;
-
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
 }
 
 .job-box {
-
-width: 320px; /* Set the desired width for each job box */
-
-height: 500px; /* Set the desired height for each job box */
-
-border: 1px solid #ccc;
-
-padding: 10px;
-
-margin: 10px;
-
+  border: 5px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 .job-box h3 {
@@ -83,10 +135,6 @@ margin: 10px;
   margin-bottom: 5px;
 
 }
-
- 
-
- 
 
 
 .popup-overlay {
@@ -175,15 +223,7 @@ border-collapse: collapse;
 
 }
 
- 
 
- 
-
- 
-
-/* Add more styles as needed */
-
-/* Add a close icon to the top-right corner of the popup content */
 
 .close-icon {
 
@@ -244,5 +284,57 @@ th, td {
   color: #888; /* Change the text color for better contrast */
 
   pointer-events: none; /* Disable pointer events to prevent interaction */
+
+}
+
+.pagination {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-top: 10px;
+
+}
+
+ 
+
+.pagination button {
+
+  padding: 5px 10px;
+
+  background-color: #007bff;
+
+  color: #fff;
+
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 5px;
+
+  margin: 0 5px;
+
+}
+
+ 
+
+.pagination span {
+
+  font-size: 16px;
+
+  margin: 0 10px;
+
+}
+
+ 
+
+.pagination button[disabled] {
+
+  background-color: #ccc;
+
+  cursor: not-allowed;
 
 }

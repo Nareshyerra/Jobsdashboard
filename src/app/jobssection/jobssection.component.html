@@ -28,6 +28,10 @@
             (keydown.enter)="onEnterPressed($event)">
           <span class="search-icon" (click)="search()"><i class="fa fa-search" aria-hidden="true"></i></span>
           <span class="clear-icon" (click)="clearSearch()"><i class="fa fa-remove" aria-hidden="true"></i></span>
+          <div *ngIf="searchResults && searchResults.length === 0 && searchText && searchText.length > 0" class="no-match-message">
+            No match found.
+          </div>
+          
         </div>
       </div>
 
@@ -35,6 +39,7 @@
   
   <div class="body">
     <div class="container">
+     
       <div class="jobs-row">
      <div class="job-box"
           *ngFor="let item of jobsList | filter:searchText | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage">
@@ -83,8 +88,8 @@
             <span *ngIf="!searchText || !item.jobType">{{ item.jobType }}</span>
         </p>
           <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
-          <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
-          <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
+          <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate | date }}</p>
+          <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate | date}}</p>
       
          <p>
             <span style="color: rgb(8, 8, 8); font-weight: 600;">Location: </span>
@@ -130,13 +135,15 @@
             </button>
 
           </p>
+        
+     
+          
         </div>
       </div>
   
- 
+     
 
-
- <nav aria-label="Page navigation example">
+ <nav aria-label="Page navigation example" style="margin-top: 25px;">
   <ul class="pagination justify-content-center">
     <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
       <button class="page-link buttons" tabindex="-1" (click)="previousPage()">Previous</button>

@@ -56,7 +56,7 @@ username:string = '';
       }
       postcontact() {
         if (this.jobForm.invalid) {
-          // Show validation errors if the form is invalid
+        
           this.validateAllFormFields(this.jobForm);
           return;
         }
@@ -66,7 +66,7 @@ username:string = '';
             this.istrue = true;
             console.log(result);
             this.toast.success({detail:"Job posted successfully", duration: 3000});
-            // location.reload();
+           
             setTimeout(() => {
               window.location.reload();
             }, 2000);

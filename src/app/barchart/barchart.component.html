@@ -1,0 +1,16 @@
+<div class="widget">
+<div class="chart-container">
+ <div>
+    <label for="selectedWeek">Select Week:</label>
+    <input type="number" id="selectedWeek" [(ngModel)]="selectedWeek">
+    <label for="selectedYear">Select Year:</label>
+    <input type="number" id="selectedYear" [(ngModel)]="selectedYear">
+    <button (click)="populateChartData()" class="button">Show Data</button>
+
+  </div>
+  <div class="chart-wrapper">
+    <canvas baseChart width="800" height="300" type="bar" [data]="barChartData"></canvas>
+    <h3 style="text-align: center;">No of Applicants per week</h3>
+  </div>
+  </div>
+  </div>

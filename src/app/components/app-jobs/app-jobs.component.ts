@@ -1,5 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AppStoreService } from 'src/app/app-store.service';
 import { AppliedJobsService } from 'src/app/applied-jobs.service';
@@ -41,14 +42,20 @@ filteredJobs: Job[] = [];
 jobs: any;
 hasResults: boolean = true;
 recentSearches: any;
+userDetails: any;
 
-  constructor( private toast: NgToastService,private jobsint:JobsdetailsService, private appliedJobsService: AppliedJobsService, private http: HttpClient, private authn:AuthnService, private userStore:AppStoreService) { 
+selectedJob: any; 
+  constructor(private router: Router, private toast: NgToastService,private jobsint:JobsdetailsService, private appliedJobsService: AppliedJobsService, private http: HttpClient, private authn:AuthnService, private userStore:AppStoreService) { 
     this.totalPages = Math.ceil(this.jobsList.length / this.itemsPerPage);
     this.generatePageNumbers();
     this.searchQuery = '';
     this.searchResults = [];
     this.filteredJobs = this.jobs;
   }
+
+ 
+
+
   updateDisplayedJobs() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -111,27 +118,61 @@ recentSearches: any;
       this.totalPages = Math.ceil(this.jobsList.length / this.itemsPerPage);
       this.generatePageNumbers();
       this.updateDisplayedJobs();
-
+      this.getUserDetailsByUsername(this.appliedUsername);
       
     });
   }
 
-  apply(username: string, item: any) {
-   
+
+
+  getUserDetailsByUsername(appliedUsername: string): void {
+    this.jobsint.getUserDetails(this.appliedUsername)
+      .subscribe(
+        (data) => {
+          this.userDetails = data;
+         
+          this.resumeData.email = this.userDetails?.email;
+        },
+        (error) => {
+          console.error(error);
+          this.userDetails = null;
+        }
+      );
+  }
   
-    this.jobsint.postappliedByUser(this.appliedUsername, item).subscribe(
+
+
+
+
+
+saveAndApply() {
+
+  if (!this.resumeData.resumeFile) {
+   
+    console.log('Please upload your resume before applying.');
+    return;
+  }
+
+
+  if (this.selectedJob) {
+    
+    this.uploadResume();
+
+   
+    this.jobsint.postappliedByUser(this.appliedUsername, this.selectedJob).subscribe(
       response => {
         console.log('Applied for the job:', response);
-        alert("Job applied successfully");
-        this.toast.success({detail:"Job applied successfully", duration: 3000});
-        item.ischecked = true;
+        
+        this.toast.success({ detail: "Job applied successfully", duration: 3000 });
+        this.selectedJob.ischecked = true; 
+       
+
+  
       }
     );
-  
-    }
-  
-  
-   
+  }
+}
+
   
   
       
@@ -141,12 +182,13 @@ recentSearches: any;
        
        }
 
-       openUploadPopup(jobId: number) {
+    
+
+      openUploadPopup(jobId: number) {
         this.showUploadPopupFlag = true;
-        this.resumeData.jobId = jobId; 
+        this.resumeData.jobId = jobId;
+        this.selectedJob = this.jobsList.find(job => job.jobId === jobId); 
       }
-
-
 
       onFileSelected(event: any) {
         const file: File = event.target.files[0];
@@ -166,7 +208,7 @@ recentSearches: any;
             response => {
              
               console.log('Resume uploaded successfully.');
-              alert("Resume uploaded sucessfully")
+             
 
 
 
@@ -184,11 +226,6 @@ recentSearches: any;
           );
       }
 
-
-   
-
-
-
       search() {
         this.searchResults = this.jobsList.filter(job => {
           return job.jobTitle.toLowerCase().includes(this.searchText.toLowerCase());
@@ -202,28 +239,27 @@ recentSearches: any;
       selectResult() {
         if (this.searchResults && this.searchResults.length > 0) {
           const selectedResult = this.searchResults[0];
-          // Assuming the first result is selected
-          // Do something with the selected result, e.g., display details, navigate to a page, etc.
-          // ...
-          // Close the search or perform any other desired actions
+          
           this.searchQuery = '';
           this.searchResults = null;
         }
       }
       clearSearch() {
-        this.searchText = ''; // Clear the search text
-        this.filteredJobs = this.jobs; // Reset the filtered jobs to show all jobs
+        this.searchText = ''; 
+        this.filteredJobs = this.jobs; 
         this.hasResults = true;
         console.log('Clear search clicked');
       }
+
+      
       onEnterPressed(event: any) {
         event.preventDefault();
-        // Implement your logic when the enter key is pressed
+       
         console.log('Enter key pressed');
         this.search();
         if (event.key === 'Enter') {
-          this.search(); // Call the search function when Enter is pressed
-        } // Call the search method on enter key press
+          this.search(); 
+        } 
       }
       highlightSearchText(text: string): string {
         if (!this.searchText || !text) {
@@ -252,8 +288,5 @@ recentSearches: any;
         }
       
         return highlightedText;
-      }
-
-      
-    
+      } 
 }

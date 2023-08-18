@@ -1,36 +1,90 @@
 
-
-
-<!-- <div class="filter-toggles">
-  <label for="filter">Select Filter:</label>
-  <select id="filter" [(ngModel)]="filterOption" (change)="getFilteredAchievements()">
-    <option value="lastWeek">Last Week</option>
-    <option value="lastMonth">Last Month</option>
-    <option value="lastYear">Last Year</option>
-  </select>
-</div> -->
-
-<div class="top-section">
-  <app-jobsdata ></app-jobsdata>
-</div>
-<!-- <div class="middle-section">
-  <div class="widget left">
-  
-    <div class="table-responsive">
-      <app-recentapplicants></app-recentapplicants>
+<div class="widget-container">
+  <div class="widget green">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="156" fill="currentColor" class="bi bi-briefcase-fill" viewBox="0 0 16 16">
+        <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>
+        <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>
+      </svg>
+    </div>
+    <div class="value">
+      <div class="top"> {{ totalJobsCount }}</div>
+      <div class="bottom">Total Jobs</div>
     </div>
   </div>
-  
-</div> -->
+  <div class="widget yellow">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg"  width="60" height="156" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+      </svg>
+      
+    </div>
+    <div class="value">
+      
+      <div class="top">{{ totalApplicantsCount }}</div>
+      <div class="bottom">No.of Applicants</div>
+    </div>
+  </div>
+  <div class="widget blue">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg"  width="60" height="156" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+      </svg>
+    </div>
+    <div class="value">
+      <div class="top">{{ totalAppliedJobsCount }}</div>
+      <div class="bottom">Applied Jobs</div>
+    </div>
+  </div>
+  <div class="widget red ">
+    <div class="icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg"  width="60" height="156" fill="currentColor" class="bi bi-clipboard-x-fill" viewBox="0 0 16 16">
+        <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm4 7.793 1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708L8 9.293Z"/>
+      </svg>
 
-  
-  
-    
-    
-
-
-<div [ngClass]="{'hide-footer': isClientHomeComponent}">
-<!-- Your content for the "ClientHomeComponent" goes here -->
+    </div>
+    <div class="value">
+      <div class="top">{{ notAppliedJobsCount }}</div>
+      <div class="bottom">Not Applied Jobs</div>
+    </div>
+  </div>
 </div>
+<div class="chart-container">
+  <canvas #jobsChart ></canvas>
+</div>
+<div class="middle-section">
 
+ <app-barchart></app-barchart>
+  <!-- <div class="widget left">
+    <div >
 
+      <div class="chart-wrapper">
+
+      <app-barchart></app-barchart>
+
+    </div>
+    </div>
+
+  </div> -->
+  
+
+  <div class="widget right">
+
+    <div >
+
+      <div class="chart-wrapper">
+
+        <div class="chart-pie">
+
+          <canvas baseChart width="300" height="350" type="pie" [data]="pieChartData" [options]="pieChartOption" *ngIf="true"></canvas>
+
+          </div>
+    </div>
+    </div>
+
+  </div>
+</div>

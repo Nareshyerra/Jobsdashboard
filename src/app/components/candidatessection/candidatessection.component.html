@@ -1,7 +1,10 @@
 
- <div class="body">
-
-  <div class="container">
+<body>
+<div class="body">
+<div class="container">
+    <div class="empty-jobs-container" *ngIf="jobResumes.length === 0">
+ <h4 class="content">No Jobs Are Applied</h4>
+    </div>
 
     <div class="jobs-row">
 
@@ -10,16 +13,18 @@
         <h3>{{ item.jobTitle }}</h3>
 
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Company: </span>{{ item.companyName }}</p>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Experience: </span>{{ item.experience }}</p>
+
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Skills: </span>{{ item.skills }}</p>
 
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Positions: </span>{{ item.positions }}</p>
 
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Qualification: </span>{{ item.qualification }}</p>
 
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">PostedDate: </span>{{ item.postedDate | date }}</p>
 
-        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate }}</p>
+        <p><span style="color: rgb(8, 8, 8); font-weight: 600;">EndDate: </span>{{ item.endDate | date}}</p>
 
         <p><span style="color: rgb(8, 8, 8); font-weight: 600;">Salary: </span>{{ item.salary }}</p>
 
@@ -45,51 +50,32 @@
 
   </div>
 
- 
-
- 
-
- 
-
- 
 
   <div id="popup-form" class="popup-overlay" [ngClass]="{ 'show': showResumesPopup }">
-
- 
-
-    <div class="popup-content">
-
+<div class="popup-content">
       <span class="close-icon" (click)="closeResumesPopup()">&times;</span>
 
       <h2 style="text-align: center;">Applicants Details</h2>
-
-     
-
       <table>
-
-   
-
         <tr>
-
-          <th class="table-header">S.No</th>
-
-          <th class="table-header">Name</th>
+         <th class="table-header">S.No</th>
+         <th class="table-header">Name</th>
 
           <th class="table-header">Email</th>
 
           <th class="table-header">Download Resume</th>
 
           <th class="table-header">Status</th>
+          <th class="table-header">Schedule Meeting</th>
 
-          <th *ngIf="!selectedResumes[0]?.isStatusSelected" class="table-header">Schedule Meeting</th>
+          <th class="table-header">Reject</th>
 
-          <th *ngIf="!selectedResumes[0]?.isStatusSelected" class="table-header">Reject</th>
-
-         
 
         </tr>
 
-        <tr *ngFor="let resume of selectedResumes;let i = index">
+        <ng-container *ngFor="let resume of selectedResumes; let i = index">
+
+          <tr *ngIf="i < itemsPerPage * (currentPage - 1) + itemsPerPage && i >= itemsPerPage * (currentPage - 1)">
 
           <td>{{ i + 1 }}</td>
 
@@ -111,42 +97,64 @@
 
           </td>
 
-        <td> {{ getFormattedStatus(resume) }}</td>
+        <!-- <td> {{ getFormattedStatus(resume) }}</td> -->
 
          
 
- 
+        <td>
 
-          <td *ngIf="!resume.isStatusSelected" [ngClass]="{'disabled-cell': resume.isStatusSelected}">
+          <ng-container *ngIf="isDateFormatted(getFormattedStatus(resume)); else defaultContent">
 
-            <input type="datetime-local" [(ngModel)]="meetingDates[resume.resumeId]" [min]="getMinMeetingDate()" [max]="getMaxMeetingDate()" />
+          Interview scheduled on <span class="date">{{ getFormattedStatus(resume) | date:'MMM dd yyyy' }} </span> 
 
-            <button type="button" class="btn btn-primary" (click)="scheduleMeeting(resume)">Schedule</button>
+          </ng-container>
 
-          </td>
+          <ng-template #defaultContent>
 
+            {{ getFormattedStatus(resume) }}
+
+          </ng-template>
+
+        </td>
+        <td>
+          <input type="date" [(ngModel)]="meetingDates[resume.resumeId]"
+                
+                 [disabled]="resume.isStatusSelected" />
+          <button type="button" class="btn btn-primary"
+                  (click)="scheduleMeeting(resume)"
+                  [disabled]="resume.isStatusSelected">Schedule</button>
+        </td>
+        
+        <td>
+          <input type="text" [(ngModel)]="rejectionReasons[resume.resumeId]"
+                 placeholder="Enter Rejection Reason"
+                 [disabled]="resume.isStatusSelected" />
+          <button type="button" class="btn btn-danger"
+                  (click)="rejectResume(resume)"
+                  [disabled]="resume.isStatusSelected">Reject</button>
+        </td>
        
-
-       
-
-          <td *ngIf="!resume.isStatusSelected" [ngClass]="{'disabled-cell': resume.isStatusSelected}">
-
-            <input type="text" [(ngModel)]="rejectionReasons[resume.resumeId]" placeholder="Enter Rejection Reason" />
-
-            <button type="button" class="btn btn-danger" (click)="rejectResume(resume)">Reject</button>
-
-          </td>
-
-       
-
+      
         </tr>
+
+      </ng-container>
 
       </table>
 
-     
+      <div class="pagination">
+
+        <button (click)="changePage(-1)">Previous</button>
+
+        <span>{{ currentPage }} / {{ totalPages }}</span>
+
+        <button (click)="changePage(1)">Next</button>
+
+      </div>
 
     </div>
 
   </div>
 
 </div>
+
+</body>
